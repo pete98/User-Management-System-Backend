@@ -79,14 +79,14 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/api/auth/**").permitAll() // Public endpoints
                         .requestMatchers("/api/admin/**").hasRole("ADMIN") // ADMIN only
+                        .requestMatchers("/api/users/**").authenticated()
                         .anyRequest().authenticated() // All other endpoints require authentication
                 )
 
                 // Add JWT filter before the UsernamePasswordAuthenticationFilter
                 .addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
-        // If using H2 Console, allow frames from the same origin
-        http.headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()));
+
 
         return http.build();
     }
