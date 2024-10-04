@@ -59,7 +59,7 @@ public class UserService {
     //Fetch user by ID
     public UserDTO getUserById(Long userId){
         User user = userRepository.findById(userId)
-                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"User Id not found"));
+                .orElseThrow(()-> new ResponseStatusException(HttpStatus.NOT_FOUND,"User id not found"));
         return mapToDTO(user);
     }
 
